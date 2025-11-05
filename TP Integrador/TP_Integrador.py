@@ -257,13 +257,22 @@ def ordenar_paises():
     
     reverso = (orden == "D")
     
+    def obtener_pais_lower(x):
+        return x['Pais'].lower()
+    
+    def obtener_poblacion(x):
+        return x['Poblacion']
+    
+    def obtener_superficie(x):
+        return x['Superficie']
+    
     match opcion:
         case "1":
-            paises_ordenados = sorted(paises, key=lambda x: x['Pais'].lower(), reverse=reverso)
+            paises_ordenados = sorted(paises, key=obtener_pais_lower, reverse=reverso)
         case "2":
-            paises_ordenados = sorted(paises, key=lambda x: x['Poblacion'], reverse=reverso)
+            paises_ordenados = sorted(paises, key=obtener_poblacion, reverse=reverso)
         case "3":
-            paises_ordenados = sorted(paises, key=lambda x: x['Superficie'], reverse=reverso)
+            paises_ordenados = sorted(paises, key=obtener_superficie, reverse=reverso)
     
     print("\n--- Paises ordenados ---")
     for pais in paises_ordenados:
@@ -289,8 +298,11 @@ def estadisticas():
             print("Opcion invalida")
 
 def MaxMin(paises):
-    pais_max = max(paises, key=lambda x: x['Poblacion'])
-    pais_min = min(paises, key=lambda x: x['Poblacion'])
+    def obtener_poblacion(x):
+        return x['Poblacion']
+    
+    pais_max = max(paises, key=obtener_poblacion)
+    pais_min = min(paises, key=obtener_poblacion)
     print(f"\nMayor poblacion: {pais_max['Pais']} con {pais_max['Poblacion']} habitantes")
     print(f"Menor poblacion: {pais_min['Pais']} con {pais_min['Poblacion']} habitantes")
 
