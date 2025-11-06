@@ -319,11 +319,17 @@ def PromSuperficie(paises):
 def PaisesContinente(paises):
     continentes = {}
     for pais in paises:
-        cont = pais['Continente']
-        continentes[cont] = continentes.get(cont, 0) + 1
-    
-    print("\nCantidad de paises por continente:")
-    for continente, cantidad in sorted(continentes.items()):
-        print(f"{continente}: {cantidad} pais(es)")
+        cont = pais['Continente'].strip().lower()
+        nombre = pais['Pais']
+        
+        if cont not in continentes:
+            continentes[cont] = []
+        continentes[cont].append(nombre)
+    print("\nPaíses por continente:")
+    for continente in sorted(continentes.keys()):
+        print(f"\n{continente}:")
+        for pais in continentes[continente]:
+            print(f"  - {pais}")
+        print(f"Total: {len(continentes[continente])} país(es)")
 
 mostrar_menu()
